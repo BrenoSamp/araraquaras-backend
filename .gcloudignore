@@ -1,0 +1,14 @@
+.git
+.gitignore
+__pycache__/
+/setup.cfg
+docker-compose.yml
+docker-compose-deploy.yml
+Dockerfile
+README.md
+/venv
+.dbdata
+/bym_desk_app/migrations/000*
+/setup/__pycache__
+/bym_desk_app/__pycache__
+/bym_desk_app/migrations/__pycache__
