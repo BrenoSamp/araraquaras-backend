@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   backend:
-    container_name: bym_backend
+    container_name: araraquaras-backend
     build:
       context: .
       dockerfile: Dockerfile
@@ -17,13 +17,13 @@ services:
   db:
     image: mysql:5.7.22
     restart: always
-    container_name: bym_db
+    container_name: araraquaros-db
     environment:
-      MYSQL_DATABASE: bym
+      MYSQL_DATABASE: araraquaros
       MYSQL_USER: root
       MYSQL_PASSWORD: root
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - .dbdata:/var/lib/mysql
     ports:
-      - 33066:3306
+      - 33067:3306

@@ -434,7 +434,7 @@ def listTicketsSolicitante(request):
 
             formattedTickets.append(formattedResult)
 
-        return JsonResponse(json.loads(json.dumps(formattedResult)), safe=False)
+        return JsonResponse(json.loads(json.dumps(formattedTickets)), safe=False)
 
 @csrf_exempt
 def vinculaAnalistaTicket(request, ticket_id):

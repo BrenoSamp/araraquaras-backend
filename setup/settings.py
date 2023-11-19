@@ -34,9 +34,9 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 MEDIA_URL = '/media/'
 
-GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-    "./credentials/bym-backend-2350f39257af.json"
-)
+# GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+#     "./credentials/bym-backend-2350f39257af.json"
+# )
 
 # Application definition
 
@@ -92,7 +92,7 @@ WSGI_APPLICATION = 'setup.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'bym',
+        'NAME': 'araraquaros',
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': 'db',
@@ -100,15 +100,6 @@ DATABASES = {
     }
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'bymdb',
-#         'USER': 'appuser',
-#         'PASSWORD': 'appuser1',
-#         'HOST': '/cloudsql/bym-backend:southamerica-west1:bymdb',
-#     }
-# }
 
 
 # Password validation
