@@ -1,6 +1,6 @@
 import pika, json
 
-params = pika.URLParameters('amqps://cuvxizzy:aFGKx1-N9z43KdNq3gHJiaDGsflN2dO1@albatross.rmq.cloudamqp.com/cuvxizzy')
+params = pika.URLParameters('amqps://ziucaoki:sHXSNCgyMx6DAPMGgZNkiCe4jjR_7Fb6@jackal.rmq.cloudamqp.com/ziucaoki')
 
 
 def publish(body):
