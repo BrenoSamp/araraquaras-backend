@@ -714,12 +714,12 @@ def getMensagensTicket(request, ticket_id):
         return JsonResponse(json.loads(json.dumps(mensagens)), safe=False)
 
 @csrf_exempt
-def createMessage(request, idTicket):
+def createMessage(request, ticket_id):
     if request.method == 'POST':
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
 
-        ticket = Ticket.objects.filter(id=idTicket)
+        ticket = Ticket.objects.filter(id=ticket_id)
 
         if ticket.exists()==False:
             error = {
@@ -729,8 +729,7 @@ def createMessage(request, idTicket):
             return JsonResponse(error, status=400)
         message = {
             'mensagem': body['mensagem'],
-            'imagem': body['imagem'],
-            'ticket_id': idTicket,
+            'ticket_id': ticket_id,
             'usuario_id': body['usuario_id'],
         }
 
@@ -739,10 +738,9 @@ def createMessage(request, idTicket):
         mensagemSerializer.save()
 
         messageFormatted = {
-            'id': mensagemSerializer['id'],
+            'id': mensagemSerializer.data['id'],
             'mensagem': body['mensagem'],
-            'imagem': body['imagem'],
-            'ticket_id': idTicket,
+            'ticket_id': ticket_id,
             'usuario_id': body['usuario_id'],
         }
 
