@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 from collections import defaultdict
 import json
-from bym_desk_app.producer import publish
+from bym_desk_app.producer import publish, notifyMessage
 import array
 import numpy
 
@@ -491,6 +491,18 @@ def atualizaStatusTicket(request, ticket_id):
         return JsonResponse(error, status=400)
 
 @csrf_exempt
+def atualizaStatusTicketSolicitante(request, ticket_id):
+    if request.method == 'PUT':
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+
+        ticket = Ticket.objects.get(id=ticket_id)
+        ticket.status = body['status']
+        ticket.save()
+
+        return JsonResponse({'message':'ok'})
+
+@csrf_exempt
 def listTicketsAnalista(request):
     if request.method == 'POST':
         body_unicode = request.body.decode('utf-8')
@@ -613,7 +625,6 @@ def createTicket(request):
         localId = data.get("local_id")
         status = data.get("status")
         descricao = data.get("descricao")
-        imagem = request.FILES['imagem']
         current_date = datetime.date.today()
 
         ticket = {
@@ -640,7 +651,6 @@ def createTicket(request):
 
         mensagem = {
             'ticket_id': ticketFormatted['id'],
-            'imagem': imagem,
             'mensagem': descricao,
             'usuario_id': solicitanteId
         }
@@ -743,5 +753,14 @@ def createMessage(request, ticket_id):
             'ticket_id': ticket_id,
             'usuario_id': body['usuario_id'],
         }
+
+        ticket = Ticket.objects.get(id=ticket_id)
+
+        analista = Analista.objects.get(id=ticket.analista_id.id)
+        userAnalista = analista.usuario_id  # Assumindo que há um campo 'usuario' em Analista que é uma ForeignKey para Usuario
+        userSolicitante = ticket.solicitante_id # Assumindo que há um campo 'usuario' em Solicitante que é uma ForeignKey para Usuario
+
+        notifyMessage({'nome': userAnalista.nome, 'ticket_id': ticket_id, 'email': userAnalista.email})
+        notifyMessage({'nome': userSolicitante.nome, 'ticket_id': ticket_id, 'email': userSolicitante.email})
 
         return JsonResponse(messageFormatted)

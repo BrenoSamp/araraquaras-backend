@@ -8,3 +8,9 @@ def publish(body):
     channel = connection.channel()
     channel.basic_publish(exchange='', routing_key='novo_ticket_setor', body=json.dumps(body))
     connection.close()
+
+def notifyMessage(body):
+    connection = pika.BlockingConnection(params)
+    channel = connection.channel()
+    channel.basic_publish(exchange='', routing_key='nova_mensagem_ticket', body=json.dumps(body))
+    connection.close()

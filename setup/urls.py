@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from bym_desk_app.views import UsuariosViewSet, AnalistasViewSet, TicketsViewSet, createAnalista, MensagensViewSet, BlocosViewSet, LocaisViewSet, login, createUser, listTicketsAnalista, listTicketsSolicitante, MatriculasViewSet, createTicket, getBlocoLocal, getMensagensTicket, createMessage, listTicketsAdmin, vinculaAnalistaTicket, atualizaStatusTicket, createMatricula, checkAdmin, createBloco, createLocal, createBlocoLocal, testPublish
+from bym_desk_app.views import UsuariosViewSet, AnalistasViewSet, TicketsViewSet, createAnalista, MensagensViewSet, BlocosViewSet, LocaisViewSet, login, createUser, listTicketsAnalista, listTicketsSolicitante, MatriculasViewSet, createTicket, getBlocoLocal, getMensagensTicket, createMessage, listTicketsAdmin, vinculaAnalistaTicket, atualizaStatusTicket, createMatricula, checkAdmin, createBloco, createLocal, createBlocoLocal, testPublish, atualizaStatusTicketSolicitante
 from rest_framework import routers
 
 router = routers.DefaultRouter()
@@ -39,6 +39,7 @@ urlpatterns = [
     path('solicitante/tickets', listTicketsSolicitante),
     path('ticket/<int:ticket_id>/vinculo', vinculaAnalistaTicket),
     path('ticket/<int:ticket_id>/status', atualizaStatusTicket),
+    path('solicitante/<int:ticket_id>/status', atualizaStatusTicketSolicitante),
     path('solicitante/create', createUser),
     path('solicitante/criarTicket', createTicket),
     path('solicitante/criarTicket', getBlocoLocal),
