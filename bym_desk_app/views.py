@@ -471,12 +471,12 @@ def atualizaStatusTicket(request, ticket_id):
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
 
-        analista = Analista.objects.filter(id=body['analista_id'])
+        analista = Analista.objects.filter(usuario_id=body['analista_id'])
 
         q = Q()
 
         if analista.exists():
-            analista = Analista.objects.get(id=body['analista_id'])
+            analista = Analista.objects.get(usuario_id=body['analista_id'])
             ticket = Ticket.objects.get(id=ticket_id)
             ticket.status = body['status']
             ticket.analista_id = analista
