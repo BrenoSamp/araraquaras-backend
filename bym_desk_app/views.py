@@ -536,7 +536,7 @@ def listTicketsAnalista(request):
 
                 formattedTickets.append(formattedResult)
 
-            return JsonResponse(json.loads(json.dumps(formattedResult)), safe=False)
+            return JsonResponse(json.loads(json.dumps(formattedTickets)), safe=False)
 
         error = {
             'error': 'Analista não existe'
